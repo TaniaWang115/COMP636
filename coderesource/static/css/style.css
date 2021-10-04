@@ -1,0 +1,163 @@
+/*
+   Filename:         style.css
+*/
+/* Display HTML5 structural elements as blocks */
+
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, ul, ol, li, dl, dt, dd, img, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, a, article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section {
+    /* Cancel out some differences between browser defaults */
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+body{
+	display: grid;
+	grid-template-columns: 12rem auto;
+}
+
+header, footer{
+	grid-column: 1/3;
+}
+
+nav{
+	grid-column: 1;
+}
+
+
+nav li{
+	padding-left:2rem;
+	padding-top:2rem;
+	padding-bottom: 2rem;
+}
+/* TYPOGRAPHY */
+body {
+    font-family: Lucida Sans , Arial , sans serif;
+    color: #444444;
+    line-height: 1.5;
+}
+h1 {
+    font-size: 2rem;
+    text-align: center;
+}
+footer p{
+	text-align: center;
+}
+header, footer{
+	background-color: #6666ff;
+	color: #ffffff;
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+}
+
+nav {
+	background-color: antiquewhite;
+}
+#selected {
+    color: #ff0000;
+}
+a:hover {
+    color: #ff0000;
+}
+#selectedText{
+	font-style: italic;
+	color: 6666ff;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+h2{
+	background-color: #CCFFFF;
+}
+
+/* NAVIGATION */
+
+nav ul{
+    list-style-type: none;
+}
+
+nav a{
+    text-decoration: none;
+	color: #444444;
+	font-size: large;
+}
+
+/* IMAGES */
+img {
+    /* Images are forced to fit the size of the box (element) they are in. */
+    width: 100%;
+}
+form{
+	float: center;
+	width: 60%;
+	padding-left: 6rem;
+	
+}
+
+fieldset{
+	/*background-color: #cccccc;*/
+	border: 1px solid;
+	float: center;
+	width: 100%;
+}
+
+legend{
+	
+	padding: 3px 0px;
+	text-indent: 5px;
+	width: 20%;
+}
+
+label{
+	clear: left;
+	display: block;
+	float: left;
+	font-size: 0.9em;
+	margin: 7px 4% 7px 5px;
+	width: 40%;
+}
+
+input{
+	display: block;
+	float: left;
+	font-size: 0.9em;
+	margin: 7px 0px;
+	width: 50%;
+}
+
+select{
+	display: block;
+	float: left;
+	font-size: 0.9em;
+	margin: 7px 0px;
+	width: 50%;
+}
+
+form p{
+	text-align: center;
+}
+
+input[type="submit"]{
+	background-color: #CCFFFF;
+}
+
+
+input[type="reset"]{
+	background-color: #cccccc;
+}
+
+
+input[type="submit"], input[type="reset"]{
+	display: inline;
+	float: none;
+	height: 40px;
+	width: 40%;
+}
+
+.dropdown{
+	padding: 1rem 10rem 10rem 10rem;
+}
+
+#welcome{
+	margin-left: 10rem;
+	margin-top: 10rem;
+}
