@@ -16,11 +16,12 @@
     <ul>
       <li><a href="/members" id="selected">Account</a></li>
       <li><a href="/news">News</a></li>
-      <li><a href="fixture.html">Fixtures</a></li>
+      <li><a href="/teams">Teams</a></li>
+      <li><a href="/fixtures">Fixtures</a></li>
     </ul>
   </nav>
   <main>
-    <h1 >Assign {{memberName}} into a Club! </h1>
+    <h1 >Assign {{memberName}} into a Team! </h1>
     
     <input type="hidden" name="id" value={{memberId}} /> 
     
@@ -46,9 +47,9 @@
         <td>{{result[2]}}</td>
         <td>{{result[3]}}</td>
         <td>{{result[4]}}</td>
-        <td>{{result[4]}}</td>
+        <td>{{result[5]}}</td>
         <td>
-            <a href="/member/team?memberid={{result[0]}}" class="link-info">Assign</a>
+            <a href="/member/team?memberid={{memberId}}&teamid={{result[0]}}" class="link-info">Assign</a>
         </td>
       </tr>  
       {% endfor %}

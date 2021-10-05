@@ -16,7 +16,8 @@
     <ul>
       <li><a href="/members" >Accounts</a></li>
       <li><a href="/news" Id="selected">News</a></li>
-      <li><a href="fixture.html">Fixtures</a></li>
+      <li><a href="/teams" >Teams</a></li>
+      <li><a href="/fixtures">Fixtures</a></li>
     </ul>
   </nav>
   <main>
@@ -30,7 +31,7 @@
       <th>NewByline</th>
       <th>NewsDate</th>
       <th>News</th>
-      <th>Operator</th>
+      <!--th>Operator</th-->
       </tr>
     </thead>
     {# this is a comment the line below prints the db result #}
@@ -44,11 +45,11 @@
         <td>{{result[3]}}</td>
         <td>{{result[4]}}</td>
         <td>{{result[5]}}</td>
-        <td>
+        <!--td>
             <a href="/member?memberid={{result[0]}}" class="link-info">Details</a>
             <a href="/member/update?memberid={{result[0]}}" class="link-secondary">Update</a>
             <a  href="/news/delete?newsid={{result[0]}}" class="link-danger">Delete</a>
-        </td>
+        </td-->
       </tr>  
       {% endfor %}
     </tbody>

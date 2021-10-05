@@ -2,7 +2,7 @@ import db
 from datetime import date, datetime
 
 def GetFristNewsById(clubId):
-    sqlCommand = "select newsID, newsheader, newsbyline, newsdate, news from ClubNews where clubId={} orderby newsdate limit 3;".format(clubId)
+    sqlCommand = "select newsID, newsheader, newsbyline, newsdate, news from ClubNews where clubId={} order by newsdate limit 3;".format(clubId)
     print(f"{sqlCommand}")
     select_result = db.DBOperator(sqlCommand)
     print(f"{select_result}")
@@ -18,7 +18,7 @@ def AddNews(clubId,newsheader, newsbyline, news):
     return select_result
 
 def GetNews():
-    sqlCommand = "select newsID, ClubName, newsheader, newsbyline, newsdate, news from ClubNews join Clubs on ClubNews.ClubId= Clubs.ClubId;"
+    sqlCommand = "select newsID, ClubName, newsheader, newsbyline, newsdate, news from ClubNews join Clubs on ClubNews.ClubId= Clubs.ClubId order by ClubNews.newsdate desc, newsID desc;"
     print(f"{sqlCommand}")
     select_result = db.DBOperator(sqlCommand)
     print(f"{select_result}")

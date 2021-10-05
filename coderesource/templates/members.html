@@ -16,11 +16,15 @@
     <ul>
       <li><a href="/members" Id="selected">Accounts</a></li>
       <li><a href="/news">News</a></li>
-      <li><a href="fixture.html">Fixtures</a></li>
+      <li><a href="/teams">Teams</a></li>
+      <li><a href="/fixtures">Fixtures</a></li>
     </ul>
   </nav>
   <main>
     <a href="member/add" class="link-primary">Add a New Member</a>
+
+    
+
     <table class="table table-hover">
       <thead>
       <tr>
@@ -43,11 +47,25 @@
         <td>{{result[2]}}</td>
         <td>{{result[3]}}</td>
         <td>{{result[4]}}</td>
-        <td>{{result[5]}}</td>
+        {% if result[5] == 1%}
+        <td>Active</td>
+        {% else %}
+        <td>Inactive</td>
+        {% endif %}
         <td>
             <a href="/member?memberid={{result[0]}}" class="link-info">Details</a>
             <a href="/member/update?memberid={{result[0]}}" class="link-secondary">Update</a>
-            <a  href="/member/delete?memberid={{result[0]}}" class="link-danger">Delete</a>
+            <form action="/member/status" method="POST" id="myForm">
+              <input type="HIDDEN" name="memberid" VALUE="{{result[0]}}">
+              <input type="HIDDEN" name="status" VALUE="{{result[5]}}">
+            </form>
+            {% if result[5] == 1%}
+            <a  rel="nofollow" data-method="post" href="#" onClick="document.getElementById('myForm').submit();return false">Inactive</a>
+            {% else %}
+            <a  rel="nofollow" data-method="post" href="#" onClick="document.getElementById('myForm').submit();return false">Active</a>
+            {% endif %}
+          
+            <!--a  href="/member/delete?memberid={{result[0]}}" class="link-danger">Delete</a-->
             <a href="/member/team?memberid={{result[0]}}&firstname={{result[1]}}&lastname={{result[2]}}" class="link-primary">Assign Team</a>
         </td>
       </tr>  

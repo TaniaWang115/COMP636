@@ -16,7 +16,8 @@
     <ul>
       <li><a href="/members" Id="selected">Accounts</a></li>
       <li><a href="/news">News</a></li>
-      <li><a href="fixture.html">Fixtures</a></li>
+      <li><a href="/teams">Teams</a></li>
+      <li><a href="/fixtures">Fixtures</a></li>
     </ul>
   </nav>
   <main>
@@ -27,7 +28,7 @@
           <label for="lastname">LastName:</label>
           <input type="text" id="lastname" name="lastname" required="required" /> <br/>   
           <label for="birthdate">Birthdate:</label>
-          <input type="text" id="birthdate" name="birthdate" required="required" /> <br/> 
+          <input type="date" id="birthdate" name="birthdate" required="required"  /> <br/> 
           <label for="clubid">Club:</label>
           <input id="clubid" name="clubid" type="hidden" value="{{clublist[0][0]}}" /> <br/>
           <select id="selection" class="form-select" aria-label="Default select example" onchange="showData()" >

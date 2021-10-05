@@ -8,8 +8,8 @@ def GetAllTeams():
     return select_result
 
 
-def AddTeamInClub(teamId, clubId):
-    sqlCommand = "update Teams set clubId =%s where teamID= %s;",(clubId,str(teamId),)
+def AddTeamInClub(teamname, clubId):
+    sqlCommand = "insert into Teams (teamname, clubid) values ('{}','{}');".format(teamname,clubId)
     print(f"{sqlCommand}")
     select_result = db.DBOperator(sqlCommand)
     print(f"{select_result}")

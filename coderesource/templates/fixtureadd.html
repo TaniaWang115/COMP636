@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+  <title>Accounts</title>
+</head>
+<body>
+  <header>
+    <h1>Rugby team Management System</h1>
+  </header>
+  <nav>
+    <ul>
+      <li><a href="/members" >Accounts</a></li>
+      <li><a href="/news">News</a></li>
+      <li><a href="/teams">Teams</a></li>
+      <li><a href="/fixtures" Id="selected">Fixtures</a></li>
+    </ul>
+  </nav>
+  <main>
+    <h2>Add A New Fixtures</h2>
+    <form action="/fixtures/add" method="POST">
+          <label for="date">FixtureDate:</label>
+          <input type="date" id="date" name="date" required="required"  /> <br/>
+          <label for="time">FixtureTime:</label>
+          <input type="time" id="time" name="time" required="required" /> <br/>
+          <label for="hometeamid">HomeTeam:</label>
+          <input id="hometeamid" name="hometeamid" type="hidden" value="{{teamlist[0][0]}}" /> <br/>
+          <select id="selection1" class="form-select" aria-label="Default select example" onchange="showData1()" >
+            {% for team in teamlist %}
+            <option value="{{team[0]}}">{{team[2]}}</option>
+            {% endfor %}
+          </select>     
+          <label for="awayteamid">AwayTeam:</label>
+          <input id="awayteamid" name="awayteamid" type="hidden" value="{{teamlist[0][0]}}" /> <br/>
+          <select id="selection2" class="form-select" aria-label="Default select example" onchange="showData2()" >
+            {% for team in teamlist %}
+            <option value="{{team[0]}}">{{team[2]}}</option>
+            {% endfor %}
+          </select>  
+          <p>
+            <input type="submit" value="Submit"/>
+            <input type="reset" value="Cancel"/>
+          </p>
+      </form>
+  </main>
+  <footer>
+    <p>Developed by Amanda Chen</p>
+ </footer>
+</body>
+<script>
+  function showData1() {
+    var ddlViewBy = document.getElementById('selection1');
+    var selectedOption = ddlViewBy.options[ddlViewBy.selectedIndex].value;
+    document.getElementById('hometeamid').value = selectedOption;
+  }
+  function showData2() {
+    var ddlViewBy = document.getElementById('selection2');
+    var selectedOption = ddlViewBy.options[ddlViewBy.selectedIndex].value;
+    document.getElementById('awayteamid').value = selectedOption;
+  }
+   </script>
+</html>

@@ -14,28 +14,24 @@
   </header>
   <nav>
     <ul>
-      <li><a href="/members" Id="selected">Accounts</a></li>
+      <li><a href="/members" >Accounts</a></li>
       <li><a href="/news">News</a></li>
-      <li><a href="/teams" >Teams</a></li>
+      <li><a href="/teams" Id="selected">Teams</a></li>
       <li><a href="/fixtures">Fixtures</a></li>
     </ul>
   </nav>
   <main>
-    <h2>Add A New News</h2>
-    <form action="/news/add" method="POST">
-          <label for="clubid">ClubId:</label>
-          <input id="clubid" name="clubid" type="hidden" value="{{clublist[0][0]}}" /> 
+    <h2>Add A New Team</h2>
+    <form action="/teams/add" method="POST">
+          <label for="teamname">TeamName:</label>
+          <input type="text" id="teamname" name="teamname" required="required" /> <br/>
+          <label for="clubid">Club:</label>
+          <input id="clubid" name="clubid" type="hidden" value="{{clublist[0][0]}}" /> <br/>
           <select id="selection" class="form-select" aria-label="Default select example" onchange="showData()" >
             {% for club in clublist %}
             <option value="{{club[0]}}">{{club[1]}}</option>
             {% endfor %}
-          </select>
-          <label for="header">Header:</label>
-          <input type="text" id="header" name="header" required="required" /> <br/>   
-          <label for="newsbyline">NewsByline:</label>
-          <input type="text" id="newsbyline" name="newsbyline" required="required" /> <br/>      
-          <label for="context">Context:</label>
-          <input type="text" id="context" name="context" required="required" /> <br/>
+          </select>     
           <p>
             <input type="submit" value="Submit"/>
             <input type="reset" value="Cancel"/>
@@ -47,10 +43,10 @@
  </footer>
 </body>
 <script>
-    function showData() {
-      var ddlViewBy = document.getElementById('selection');
-      var selectedOption = ddlViewBy.options[ddlViewBy.selectedIndex].value;
-      document.getElementById('clubid').value = selectedOption;
-    }
-     </script>
+  function showData() {
+    var ddlViewBy = document.getElementById('selection');
+    var selectedOption = ddlViewBy.options[ddlViewBy.selectedIndex].value;
+    document.getElementById('clubid').value = selectedOption;
+  }
+   </script>
 </html>
