@@ -26,8 +26,8 @@ def GetMemberDetail(memberID):
     print(f"{select_result}")
     return select_result
 
-def UpdateMemberDetail(memberID,firstname,lastname,email,phone,address1,address2,city):
-    sqlCommand = "update Members set memberFirstName =%s, memberlastName =%s,email =%s, phone=%s, address1=%s,address2=%s,city=%s where memberId= %s;",(firstname,lastname,email,phone,address1,address2,city,str(memberID),)
+def UpdateMemberDetail(memberID,firstname,lastname,email,phone,address1,address2,city,birthdate):
+    sqlCommand = "update Members set memberFirstName ='{}', memberlastName ='{}',email ='{}', phone='{}', address1='{}',address2='{}',city='{}',birthdate='{}' where memberId= '{}';".format(firstname,lastname,email,phone,address1,address2,city,birthdate,memberID)
     print(f"{sqlCommand}")
     select_result = db.DBOperator(sqlCommand)
     print(f"{select_result}")
@@ -63,8 +63,8 @@ def AssignMemberToClub(memberID, clubID):
     return select_result
 
 
-def AssignMemberToTeam(memberID, teamID):
-    sqlCommand = "update Members set TeamId ={} where memberId= {};".format(teamID,memberID)
+def AssignMemberToTeam(memberID, teamID,clubId,gradeid):
+    sqlCommand = "update Members set TeamId ='{}',clubid='{}',gradeid='{}' where memberId= {};".format(teamID,clubId,gradeid,memberID)
     print(f"{sqlCommand}")
     select_result = db.DBOperator(sqlCommand)
     print(f"{select_result}")

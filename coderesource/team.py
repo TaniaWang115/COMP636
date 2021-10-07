@@ -1,15 +1,15 @@
 import db
 
 def GetAllTeams():
-    sqlCommand= "select teamid,clubname,teamname from Teams join Clubs on Clubs.clubid = Teams.clubid;"
+    sqlCommand= "select teamid,teamname, clubname,Teams.clubid, Grades.gradename, Grades.gradeid from Teams join Clubs on Clubs.clubid = Teams.clubid join Grades on Grades.gradeId= Teams.teamgrade;"
     print(f"{sqlCommand}")
     select_result = db.DBOperator(sqlCommand)
     print(f"{select_result}")
     return select_result
 
 
-def AddTeamInClub(teamname, clubId):
-    sqlCommand = "insert into Teams (teamname, clubid) values ('{}','{}');".format(teamname,clubId)
+def AddTeam(teamname, clubId,gradeid):
+    sqlCommand = "insert into Teams (teamname, clubid,teamgrade) values ('{}','{}','{}');".format(teamname,clubId,gradeid)
     print(f"{sqlCommand}")
     select_result = db.DBOperator(sqlCommand)
     print(f"{select_result}")

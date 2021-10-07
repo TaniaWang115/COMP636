@@ -9,6 +9,7 @@ import news
 import team
 import club
 import fixture
+import grade
 
 
 app = Flask(__name__)
@@ -40,8 +41,17 @@ def members():
 @app.route('/member/update', methods=['GET','POST'])
 def memberUpdate():
     if request.method == 'POST':
-        print(request.form)
-        return render_template('dbresult.html',"dbresult","column_names")
+        id = request.form.get('id')
+        firstname = request.form.get('firstname')
+        lastname = request.form.get('lastname')
+        email = request.form.get('email')
+        phone =  request.form.get('phone')
+        address1 = request.form.get('address')
+        address2 = request.form.get('region')
+        city = request.form.get('city')
+        birthdate = request.form.get('birthdate')
+        account.UpdateMemberDetail(id,firstname,lastname,email,phone,address1,address2,city,birthdate)
+        return redirect("/member?memberid={}".format(id))
     else:
         id = request.args.get('memberid')
         select_result = account.GetMemberDetail(id)
@@ -84,22 +94,19 @@ def addMember():
 
 @app.route('/member/team', methods=['GET','POST'])
 def memberaddteam():
-    id = request.args.get('memberid')
+    
     if request.method == 'POST':
-        firstname = request.form.get('firstname')
-        lastname = request.form.get('lastname')
-        email = request.form.get('email')
-        phone =  request.form.get('phone')
-        address1 = request.form.get('address')
-        address2 = request.form.get('region')
-        city = request.form.get('city')
-        birthdate = request.form.get('birthdate')
-        account.AddMember(firstname,lastname,email,phone,address1,address2,city,birthdate)
-        return render_template('dbresult.html',"dbresult","column_names")
+        memberid = request.form.get('memberid')
+        clubid = request.form.get('clubid')
+        teamid = request.form.get('teamid') 
+        gradeid = request.form.get('gradeid')   
+        account.AssignMemberToTeam(memberid,teamid,clubid,gradeid)
+        return redirect('/members')
     else:
+        id = request.args.get('memberid')
         firstname = request.args.get('firstname')
         lastname = request.args.get('lastname')
-        select_result = club.GetAllClub()
+        select_result = team.GetAllTeams()
         return render_template('memberteam.html', memberId = id, memberName=str(firstname)+" "+str(lastname),dbresult = select_result)
 
 
@@ -142,12 +149,13 @@ def addteams():
     if request.method == 'GET':
         select_result = club.GetClubList()
         print(select_result)
-        return render_template('teamadd.html',clublist = select_result)
+        grade_result = grade.GetAllGrade()
+        return render_template('teamadd.html',clublist = select_result,gradelist=grade_result)
     else:
         teamname = request.form.get('teamname')
         clubid = request.form.get('clubid')
-        
-        team.AddTeamInClub(teamname,clubid)
+        gradeid = request.form.get('gradeid')
+        team.AddTeam(teamname,clubid,gradeid)
         return redirect("/teams")
 
 @app.route('/fixtures', methods=['GET'])

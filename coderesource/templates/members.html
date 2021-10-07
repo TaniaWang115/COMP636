@@ -12,20 +12,18 @@
   <header>
     <h1>Rugby Club Management System</h1>
   </header>
-  <nav>
-    <ul>
-      <li><a href="/members" Id="selected">Accounts</a></li>
-      <li><a href="/news">News</a></li>
-      <li><a href="/teams">Teams</a></li>
-      <li><a href="/fixtures">Fixtures</a></li>
-    </ul>
+  <nav class="nav flex-column">
+    <a class="nav-link active" aria-current="page" href="/members" Id="selected">Accounts</a>
+    <a class="nav-link" href="/news">News</a>
+    <a class="nav-link" href="/teams">Teams</a>
+    <a class="nav-link"  href="/fixtures">Fixtures</a>
   </nav>
   <main>
     <a href="member/add" class="link-primary">Add a New Member</a>
 
     
 
-    <table class="table table-hover">
+    <table class="table table-striped">
       <thead>
       <tr>
       <th>#</th>
@@ -56,13 +54,13 @@
             <a href="/member?memberid={{result[0]}}" class="link-info">Details</a>
             <a href="/member/update?memberid={{result[0]}}" class="link-secondary">Update</a>
             <form action="/member/status" method="POST" id="myForm">
-              <input type="HIDDEN" name="memberid" VALUE="{{result[0]}}">
-              <input type="HIDDEN" name="status" VALUE="{{result[5]}}">
+              <input type="HIDDEN" name="memberid" id ="memberid">
+              <input type="HIDDEN" name="status" id="status">
             </form>
             {% if result[5] == 1%}
-            <a  rel="nofollow" data-method="post" href="#" onClick="document.getElementById('myForm').submit();return false">Inactive</a>
+            <a  rel="nofollow" data-method="post" href="#" onClick="showData('{{result[0]}}','{{result[5]}}' )">Inactive</a>
             {% else %}
-            <a  rel="nofollow" data-method="post" href="#" onClick="document.getElementById('myForm').submit();return false">Active</a>
+            <a  rel="nofollow" data-method="post" href="#" onClick="showData('{{result[0]}}','{{result[5]}}' )">Active</a>
             {% endif %}
           
             <!--a  href="/member/delete?memberid={{result[0]}}" class="link-danger">Delete</a-->
@@ -77,4 +75,11 @@
     <p>Developed by Amanda Chen</p>
  </footer>
 </body>
+<script>
+  function showData(memberid, status) {
+    document.getElementById('memberid').value = memberid;
+    document.getElementById('status').value = status;
+    document.getElementById('myForm').submit();
+  }
+   </script>
 </html>

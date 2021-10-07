@@ -23,12 +23,6 @@ nav{
 	grid-column: 1;
 }
 
-
-nav li{
-	padding-left:2rem;
-	padding-top:2rem;
-	padding-bottom: 2rem;
-}
 /* TYPOGRAPHY */
 body {
     font-family: Lucida Sans , Arial , sans serif;
@@ -37,14 +31,14 @@ body {
 }
 h1 {
     font-size: 2rem;
-    text-align: center;
+    text-align: left;
 }
 footer p{
 	text-align: center;
 }
 header, footer{
-	background-color: #6666ff;
-	color: #ffffff;
+	background-color:#CCFFFF;
+	color: #000000;
 	padding-top: 1rem;
 	padding-bottom: 1rem;
 }
@@ -58,27 +52,15 @@ nav {
 a:hover {
     color: #ff0000;
 }
-#selectedText{
-	font-style: italic;
-	color: 6666ff;
-	font-weight: bold;
-	text-decoration: none;
-}
+
 
 h2{
-	background-color: #CCFFFF;
+	padding-top: 1rem;
+	padding-bottom: 2rem;
 }
 
-/* NAVIGATION */
-
-nav ul{
-    list-style-type: none;
-}
-
-nav a{
-    text-decoration: none;
-	color: #444444;
-	font-size: large;
+main{
+	margin-left: 2rem;
 }
 
 /* IMAGES */
@@ -86,72 +68,7 @@ img {
     /* Images are forced to fit the size of the box (element) they are in. */
     width: 100%;
 }
-form{
-	float: center;
-	width: 60%;
-	padding-left: 6rem;
-	
-}
 
-fieldset{
-	/*background-color: #cccccc;*/
-	border: 1px solid;
-	float: center;
-	width: 100%;
-}
-
-legend{
-	
-	padding: 3px 0px;
-	text-indent: 5px;
-	width: 20%;
-}
-
-label{
-	clear: left;
-	display: block;
-	float: left;
-	font-size: 0.9em;
-	margin: 7px 4% 7px 5px;
-	width: 40%;
-}
-
-input{
-	display: block;
-	float: left;
-	font-size: 0.9em;
-	margin: 7px 0px;
-	width: 50%;
-}
-
-select{
-	display: block;
-	float: left;
-	font-size: 0.9em;
-	margin: 7px 0px;
-	width: 50%;
-}
-
-form p{
-	text-align: center;
-}
-
-input[type="submit"]{
-	background-color: #CCFFFF;
-}
-
-
-input[type="reset"]{
-	background-color: #cccccc;
-}
-
-
-input[type="submit"], input[type="reset"]{
-	display: inline;
-	float: none;
-	height: 40px;
-	width: 40%;
-}
 
 .dropdown{
 	padding: 1rem 10rem 10rem 10rem;

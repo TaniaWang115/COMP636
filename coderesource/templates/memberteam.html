@@ -12,28 +12,30 @@
   <header>
     <h1>Rugby Club Management System</h1>
   </header>
-  <nav>
-    <ul>
-      <li><a href="/members" id="selected">Account</a></li>
-      <li><a href="/news">News</a></li>
-      <li><a href="/teams">Teams</a></li>
-      <li><a href="/fixtures">Fixtures</a></li>
-    </ul>
+  <nav class="nav flex-column">
+    <a class="nav-link active" aria-current="page" href="/members" Id="selected">Accounts</a>
+    <a class="nav-link" href="/news">News</a>
+    <a class="nav-link" href="/teams">Teams</a>
+    <a class="nav-link"  href="/fixtures">Fixtures</a>
   </nav>
   <main>
-    <h1 >Assign {{memberName}} into a Team! </h1>
+    <h1 >Assign a Team </h1>
+    <form action="/member/team" method="POST" id="myForm">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" readonly value="{{memberName}}"/> <br/>
+      <input type="hidden" id="memberid" name="memberid"value="{{memberId}}" /> 
+      <input type="hidden" id="clubid" name="clubid" /> 
+      <input type="hidden" id="teamid" name="teamid" /> 
+    </form>
     
-    <input type="hidden" name="id" value={{memberId}} /> 
     
     <table class="table table-hover">
       <thead>
       <tr>
       <th>#</th>
-      <th>Team Name</th>
-      <th>club name</th>
-      <th>Club Address</th>
-      <th>Contact Phone</th>
-      <th>Email</th>
+      <th>Team </th>
+      <th>Club </th>
+      <th>Grade </th>
       <th>Operator</th>
       </tr>
     </thead>
@@ -45,11 +47,9 @@
         <td>{{result[0]}}</td>
         <td>{{result[1]}}</td>
         <td>{{result[2]}}</td>
-        <td>{{result[3]}}</td>
         <td>{{result[4]}}</td>
-        <td>{{result[5]}}</td>
         <td>
-            <a href="/member/team?memberid={{memberId}}&teamid={{result[0]}}" class="link-info">Assign</a>
+            <a rel="nofollow" href="#" onClick="showData('{{result[0]}}','{{result[3]}}')" class="link-info">Assign</a>
         </td>
       </tr>  
       {% endfor %}
@@ -60,4 +60,11 @@
     <p>Developed by Amanda Chen</p>
  </footer>
 </body>
+<script>
+  function showData(teamid, clubid) {
+    document.getElementById('teamid').value = teamid;
+    document.getElementById('clubid').value = clubid;
+    document.getElementById('myForm').submit();
+  }
+   </script>
 </html>
