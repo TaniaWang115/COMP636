@@ -32,8 +32,8 @@ def member():
     select_result = account.GetMemberDetail(id)
     teamId = select_result[10]
     print(teamId)
-    if(teamId== ""): #teamid = null
-        fixtureslist = None
+    if(teamId== None): #teamid = null
+        fixturesList = None
     else:
         fixturesList = fixture.GetFixtureById(teamId)
     newsList = news.GetNewsByMemberId(id)
