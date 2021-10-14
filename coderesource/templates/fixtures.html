@@ -19,7 +19,10 @@
     <a class="nav-link" aria-current="page" href="/fixtures" Id="selected">Fixtures</a>
   </nav>
   <main>
-    <a href="fixtures/add" class="link-primary">Add a Fixture</a>
+      <h2>Fixture</h2>
+        {% if adminaccess == 1 %}
+        <a href="fixtures/add" class="link-primary">Add a Fixture</a>
+        {% endif%}
     <table class="table table-striped">
       <thead>
       <tr>

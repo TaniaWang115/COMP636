@@ -12,12 +12,14 @@
   <header>
     <h1>Rugby Club Management System</h1>
   </header>
+  {% if customerdetails[11] == 1 %}
   <nav class="nav flex-column">
     <a class="nav-link active" aria-current="page" href="/members" Id="selected">Accounts</a>
     <a class="nav-link" href="/news">News</a>
     <a class="nav-link" href="/teams">Teams</a>
     <a class="nav-link"  href="/fixtures">Fixtures</a>
   </nav>
+  {% endif%}
   <main>
     <h1>Update Member Details</h1>
     {% if customerdetails %}
@@ -27,31 +29,54 @@
       {% endif %}
         {% if customerdetails %} 
         <input type="hidden" name="id" value="{{customerdetails[0]}}" /> {% endif %}
-        <label for="firstname">FirstName:</label>
-        <input type="text" id="firstname" name="firstname" required="required" {% if customerdetails %} value="{{customerdetails[1]}}" {% endif %}/> <br/>
-        <label for="lastname">LastName:</label>
-        <input type="text" id="lastname" name="lastname" required="required" {% if customerdetails %} value="{{customerdetails[2]}}" {% endif %}/> <br/>       
-        <label for="birthdate">Birthdate:</label>
-        <input type="text" id="birthdate" name="birthdate" required="required" {% if customerdetails %} value="{{customerdetails[8]}}" {% endif %} /> <br/>
-
-        <label for="email">Email:</label>
+        <div class="row mb-3">
+          <label for="firstname" class="col-sm-2 col-form-label">FirstName:</label>
+          <div class="col-sm-6">
+            <input type="text" id="firstname" name="firstname" required="required" {% if customerdetails %} value="{{customerdetails[1]}}" {% endif %}/> <br/>
+          </div>
+        </div>
+        <div class="row mb-3">
+        <label for="lastname" class="col-sm-2 col-form-label">LastName:</label>
+        <div class="col-sm-6">
+            <input type="text" id="lastname" name="lastname" required="required" {% if customerdetails %} value="{{customerdetails[2]}}" {% endif %}/> <br/>       
+          </div>
+        </div>
+      <div class="row mb-3">
+          <label for="birthdate"class="col-sm-2 col-form-label">Birthdate:</label>
+          <div class="col-sm-6">
+            <input type="text" id="birthdate" name="birthdate" required="required" {% if customerdetails %} value="{{customerdetails[8]}}" {% endif %} /> <br/>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label for="email" class="col-sm-2 col-form-label">Email:</label>
+        <div class="col-sm-6">
         <input type="email" id="email" name="email" required="required" {% if customerdetails %} value="{{customerdetails[3]}}" {% endif %}/> <br/>
-        
-        <label for="phone">Phone:</label>
+      </div></div>
+      <div class="row mb-3">
+        <label for="phone" class="col-sm-2 col-form-label">Phone:</label>
+        <div class="col-sm-6">
         <input type="text" id="phone" name="phone" required="required" onkeyup="value=value.replace(/[^\d\.]/g,'')" {% if customerdetails %} value="{{customerdetails[4]}}" {% endif %}/> <br/>
-        <fieldset id="custInfo">
-          <legend>  NZ Address *</legend>
-        <label for="address">Address:</label>
+      </div></div>
+      <div class="row mb-3">
+        <label for="address" class="col-sm-2 col-form-label">Address:</label>
+        
+        <div class="col-sm-6">
         <input type="text" id="address" name="address" required="required" {% if customerdetails %} value="{{customerdetails[5]}}" {% endif %}/> <br/>
-        <label for="region">Region:</label>
+      </div></div>
+      <div class="row mb-3">
+          <label for="region" class="col-sm-2 col-form-label">Region:</label>
+          <div class="col-sm-6">
         <input type="text" id="region" name="region" required="required" {% if customerdetails %} value="{{customerdetails[6]}}" {% endif %}/> <br/>
-        <label for="city">City:</label>
+      </div></div>
+      <div class="row mb-3">
+           <label for="city" class="col-sm-2 col-form-label">City:</label>
+           <div class="col-sm-6">
         <input type="text" id="city" name="city" required="required" {% if customerdetails %} value="{{customerdetails[7]}}" {% endif %}/> <br/>  
-      </fieldset>
+      </div></div>
       
         <p>
-          <input type="submit" value="Submit"/>
-          <input type="reset" value="Cancel"/>
+          <input class="btn btn-outline-primary" type="submit" value="Submit"/>
+          <input class="btn btn-outline-secondary" type="reset" value="Cancel"/>
         </p>
     </form>
   </main>

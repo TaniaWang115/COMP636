@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+  <title>Account Details</title>
+</head>
+<body>
+  <header style="background-color:#CCFFFF; padding-top: 1rem; padding-bottom: 1rem;text-align: center;">
+    <h1>Rugby Club Management System</h1>
+  </header>
+ 
+  <div>
+    <h2>Information Details</h2>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+        <th>FirstName</th>
+        <th>LastName</th>
+        <th>Email</th>
+        <th>phone</th>
+        <th>Address</th>
+        <th>Region</th>
+        <th>City</th>
+        <th>Birthdate</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{customerdetail[1]}}</td>
+          <td>{{customerdetail[2]}}</td>
+          <td>{{customerdetail[3]}}</td>
+          <td>{{customerdetail[4]}}</td>
+          <td>{{customerdetail[5]}}</td>
+          <td>{{customerdetail[6]}}</td>
+          <td>{{customerdetail[7]}}</td>
+          <td>{{customerdetail[8]}}</td>
+        </tr>  
+      </tbody>
+    </table>
+    <a href="/member/update?memberid={{customerdetail[0]}}" class="link-secondary">Update</a>
+</div>
+<div>
+    <h2>Club News</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+        <th>NewId</th>
+        <th>ClubName</th>
+        <th>NewHeader</th>
+        <th>NewByline</th>
+        <th>NewsDate</th>
+        <th>News</th>
+        </tr>
+      </thead>
+      
+      <tbody>
+        {% for news in newslist %}
+        <tr>
+          <td>{{news[0]}}</td>
+          <td>{{news[1]}}</td>
+          <td>{{news[2]}}</td>
+          <td>{{news[3]}}</td>
+          <td>{{news[4]}}</td>
+          <td>{{news[5]}}</td>
+        </tr>  
+        {% endfor %}
+      </tbody>
+    </table>
+</div>
+  <div>
+    <h2>Upcoming Fixtures for {{customerdetail[10]}}</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+        <th>Id</th>
+        <th>FixtureDate</th>
+        <th>HomeTeam</th>
+        <th>AwayTeam</th>
+        </tr>
+      </thead>
+      
+      <tbody>
+        {% for fixture in fixturelist %}
+        <tr>
+          <td>{{fixture[0]}}</td>
+          <td>{{fixture[1]}}</td>
+          <td>{{fixture[2]}}</td>
+          <td>{{fixture[3]}}</td>
+        </tr>  
+        {% endfor %}
+      </tbody>
+    </table>
+   
+  </div>
+        
+  
+  <footer style="background-color:#CCFFFF; padding-top: 1rem; padding-bottom: 1rem; text-align: center;">
+      <p>Developed by Amanda Chen</p>
+  </footer>
+</body>
+</html>

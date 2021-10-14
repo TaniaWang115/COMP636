@@ -19,10 +19,10 @@
     <a class="nav-link"  href="/fixtures">Fixtures</a>
   </nav>
   <main>
-    <a href="member/add" class="link-primary">Add a New Member</a>
-
     
-
+    <h2>Account List</h2>
+    
+    <a href="member/add" class="link-primary">Add a New Member</a>
     <table class="table table-striped">
       <thead>
       <tr>
@@ -57,7 +57,7 @@
               <input type="HIDDEN" name="memberid" id ="memberid">
               <input type="HIDDEN" name="status" id="status">
             </form>
-            {% if result[5] == 1%}
+            {% if result[5] == 1 %}
             <a  rel="nofollow" data-method="post" href="#" onClick="showData('{{result[0]}}','{{result[5]}}' )">Inactive</a>
             {% else %}
             <a  rel="nofollow" data-method="post" href="#" onClick="showData('{{result[0]}}','{{result[5]}}' )">Active</a>

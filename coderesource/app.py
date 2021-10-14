@@ -1,3 +1,4 @@
+from sys import argv
 from flask import Flask
 from flask import render_template
 from flask import request
@@ -10,6 +11,8 @@ import team
 import club
 import fixture
 import grade
+isAdmin = "0"
+memberid = " "
 
 
 app = Flask(__name__)
@@ -27,15 +30,26 @@ def home():
 def member():
     id = request.args.get('memberid')
     select_result = account.GetMemberDetail(id)
+    teamId = select_result[10]
+    print(teamId)
+    if(teamId== ""): #teamid = null
+        fixtureslist = None
+    else:
+        fixturesList = fixture.GetFixtureById(teamId)
+    newsList = news.GetNewsByMemberId(id)
+    
     print(select_result)
-    return render_template('memberdetails.html',customerdetails = select_result)
+    return render_template('member.html',customerdetail = select_result,newslist = newsList,fixturelist = fixturesList)
     
 
 @app.route('/members', methods=['GET'])
 def members():
+    global isAdmin
+    if (request.args.get('admin') == '1'):
+        isAdmin = "1"
     select_result = account.GetAllMembers(False)
     print(select_result)
-    return render_template('members.html',dbresult = select_result)
+    return render_template('members.html',dbresult = select_result,adminaccess = isAdmin)
 
 
 @app.route('/member/update', methods=['GET','POST'])
@@ -93,14 +107,12 @@ def addMember():
         return render_template('memberadd.html',clublist = select_result)
 
 @app.route('/member/team', methods=['GET','POST'])
-def memberaddteam():
-    
+def memberaddteam(): 
     if request.method == 'POST':
         memberid = request.form.get('memberid')
         clubid = request.form.get('clubid')
         teamid = request.form.get('teamid') 
-        gradeid = request.form.get('gradeid')   
-        account.AssignMemberToTeam(memberid,teamid,clubid,gradeid)
+        account.AssignMemberToTeam(memberid,teamid,clubid)
         return redirect('/members')
     else:
         id = request.args.get('memberid')
@@ -113,7 +125,7 @@ def memberaddteam():
 @app.route('/news', methods=['GET'])
 def allnews():
     select_result = news.GetNews()
-    return render_template('news.html',dbresult = select_result)
+    return render_template('news.html',dbresult = select_result,adminaccess = isAdmin)
 
 @app.route('/news/add', methods=['GET','POST']) 
 def addnews(): 
@@ -142,7 +154,7 @@ def newsdetails():
 @app.route('/teams', methods=['GET'])
 def allteams():
     select_result = team.GetAllTeams()
-    return render_template('teams.html',dbresult = select_result)
+    return render_template('teams.html',dbresult = select_result,adminaccess = isAdmin)
 
 @app.route('/teams/add', methods=['GET','POST'])
 def addteams():
@@ -161,7 +173,7 @@ def addteams():
 @app.route('/fixtures', methods=['GET'])
 def fixtures():
     select_result = fixture.GetFixture()
-    return render_template('fixtures.html',dbresult = select_result)  
+    return render_template('fixtures.html',dbresult = select_result,adminaccess = isAdmin)  
 
 @app.route('/fixtures/add', methods=['GET','POST'])
 def addFixtures():
@@ -175,3 +187,9 @@ def addFixtures():
         date = request.form.get('date') +" "+ request.form.get('time')+":00"
         fixture.AssignFixture(hometeamid,awayteamid,date)
         return redirect("/fixtures")   
+
+@app.route('/grades', methods=['GET'])
+def grades():
+    select_result = team.GetAllTeams()
+    print(select_result)
+    return render_template('fixtureadd.html',teamlist = select_result)

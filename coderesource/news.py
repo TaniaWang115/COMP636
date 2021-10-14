@@ -1,3 +1,4 @@
+
 import db
 from datetime import date, datetime
 
@@ -11,7 +12,7 @@ def GetFristNewsById(clubId):
 def AddNews(clubId,newsheader, newsbyline, news):
     today  = datetime.today()
     date = today.strftime("%y-%m-%d")
-    sqlCommand = "insert into ClubNews (clubId,newsheader, newsbyline,news,newsdate) values('{}','{}', '{}','{}','{}');".format(clubId,newsheader, newsbyline, news,date)
+    sqlCommand = "insert into ClubNews (clubId,newsheader, newsbyline,news,newsdate) values(\"{}\",\"{}\", \"{}\",\"{}\",\"{}\");".format(clubId,newsheader, newsbyline, news,date)
     print(f"{sqlCommand}")
     select_result = db.DBOperator(sqlCommand)
     print(f"{select_result}")
@@ -26,6 +27,13 @@ def GetNews():
 
 def DeleteNews(newsId):
     sqlCommand = "delete from ClubNews where newsId = {};".format(newsId)
+    print(f"{sqlCommand}")
+    select_result = db.DBOperator(sqlCommand)
+    print(f"{select_result}")
+    return select_result
+
+def GetNewsByMemberId(memberid):
+    sqlCommand = "select newsID, ClubName, newsheader, newsbyline, newsdate, news from ClubNews join Clubs on ClubNews.ClubId= Clubs.ClubId where ClubNews.ClubId = (select clubid from Members where Members.memberid='{}') order by ClubNews.newsdate desc, newsID desc limit 3;".format(memberid)
     print(f"{sqlCommand}")
     select_result = db.DBOperator(sqlCommand)
     print(f"{select_result}")

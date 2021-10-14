@@ -9,7 +9,7 @@ def GetAllTeams():
 
 
 def AddTeam(teamname, clubId,gradeid):
-    sqlCommand = "insert into Teams (teamname, clubid,teamgrade) values ('{}','{}','{}');".format(teamname,clubId,gradeid)
+    sqlCommand = "insert into Teams (teamname, clubid,gradeid) values ('{}','{}','{});".format(teamname,clubId)
     print(f"{sqlCommand}")
     select_result = db.DBOperator(sqlCommand)
     print(f"{select_result}")
