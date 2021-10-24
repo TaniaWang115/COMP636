@@ -6,6 +6,8 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
   <title>Accounts</title>
 </head>
 <body>
@@ -23,6 +25,14 @@
     <h2>Account List</h2>
     
     <a href="member/add" class="link-primary">Add a New Member</a>
+    <br> 
+    <div class="row mb-3">
+      <label for="firstname" class="col-sm-4 col-form-label">Type something in the input field to search the table:</label>
+      <div class="col-sm-6">
+        <input class="form-control" id="myInput" type="text" placeholder="Search..">
+      </div>
+    </div>
+      
     <table class="table table-striped">
       <thead>
       <tr>
@@ -37,7 +47,7 @@
     </thead>
     {# this is a comment the line below prints the db result #}
     
-    <tbody>
+    <tbody id="myTable">
       {% for result in dbresult %}
       <tr>
         <td>{{result[0]}}</td>
@@ -81,5 +91,14 @@
     document.getElementById('status').value = status;
     document.getElementById('myForm').submit();
   }
+
+  $(document).ready(function(){
+    $("#myInput").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#myTable tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
    </script>
 </html>

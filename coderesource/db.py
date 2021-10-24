@@ -18,7 +18,7 @@ def DBConnect():
         return dbconn
 
 
-def DBOperator(sqlCommands):
+def DBOperator(sqlCommands):    
     cur = DBConnect()
     cur.execute(sqlCommands)
     select_result = cur.fetchall()

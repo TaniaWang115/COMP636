@@ -178,9 +178,17 @@ def fixtures():
 @app.route('/fixtures/add', methods=['GET','POST'])
 def addFixtures():
     if request.method == 'GET':
-        select_result = team.GetAllTeams()
-        print(select_result)
-        return render_template('fixtureadd.html',teamlist = select_result)
+        gradeId = request.args.get('gradeid')
+        if gradeId == None:
+            select_result = team.GetAllTeams()
+            grade_result = grade.GetAllGrade()
+            print(select_result)
+            return render_template('fixtureadd.html',teamlist = select_result, gradelist = grade_result,gradeid= None)
+        else:
+            select_result = team.GetAllTeamsByGradeId(gradeId)
+            grade_result =grade.GetAllGrade()
+            print(select_result)
+            return render_template('fixtureadd.html',teamlist = select_result, gradelist = grade_result, gradeid=gradeId)
     else:
         hometeamid = request.form.get('hometeamid')
         awayteamid = request.form.get('awayteamid')

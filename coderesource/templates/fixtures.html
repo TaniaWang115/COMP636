@@ -6,7 +6,8 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
-  <title>Accounts</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <title>Fixtures</title>
 </head>
 <body>
   <header>
@@ -19,29 +20,41 @@
     <a class="nav-link" aria-current="page" href="/fixtures" Id="selected">Fixtures</a>
   </nav>
   <main>
-      <h2>Fixture</h2>
-        {% if adminaccess == 1 %}
+      <h2>Fixtures</h2>
+      <br>  
         <a href="fixtures/add" class="link-primary">Add a Fixture</a>
-        {% endif%}
+        <div class="row mb-3">
+          <label for="firstname" class="col-sm-4 col-form-label">Type something in the input field to search the table:</label>
+          <div class="col-sm-6">
+            <input class="form-control" id="myInput" type="text" placeholder="Search..">
+          </div>
+        </div>
+          
     <table class="table table-striped">
       <thead>
       <tr>
-      <th>NewId</th>
+      <th>Id</th>
       <th>FixtureDate</th>
-      <th>HomeTeam</th>
-      <th>AwayTeam</th>
+      <th>Place</th>
+      <th>HomeTeamName</th>
+      <th>HomeTeamClubName</th>
+      <th>AwayTeamName</th>
+      <th>AwayTeamClubName</th>
       <!--th>Operator</th-->
       </tr>
     </thead>
     {# this is a comment the line below prints the db result #}
     
-    <tbody>
+    <tbody id="myTable">
       {% for result in dbresult %}
       <tr>
         <td>{{result[0]}}</td>
         <td>{{result[1]}}</td>
+        <td>{{result[5]}}</td>
         <td>{{result[2]}}</td>
-        <td>{{result[3]}}</td>
+        <td>{{result[4]}}</td>
+        <td>{{result[6]}}</td>
+        <td>{{result[8]}}</td>
     
         <!--td>
             <a href="/member?memberid={{result[0]}}" class="link-info">Details</a>
@@ -56,5 +69,15 @@
   <footer>
     <p>Developed by Amanda Chen</p>
  </footer>
+ <script>
+  $(document).ready(function(){
+    $("#myInput").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#myTable tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
+  </script>
 </body>
 </html>
