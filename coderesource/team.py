@@ -17,7 +17,7 @@ def GetAllTeamsByGradeId(gradeid):
 
 
 def AddTeam(teamname, clubId,gradeid):
-    sqlCommand = "insert into Teams (teamname, clubid,gradeid) values ('{}','{}','{});".format(teamname,clubId)
+    sqlCommand = "insert into Teams (teamname, clubid,teamgrade) values ('{}','{}','{}');".format(teamname,clubId,gradeid)
     print(f"{sqlCommand}")
     select_result = db.DBOperator(sqlCommand)
     print(f"{select_result}")

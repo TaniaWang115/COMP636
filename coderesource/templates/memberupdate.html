@@ -12,14 +12,22 @@
   <header>
     <h1>Rugby Club Management System</h1>
   </header>
-  {% if customerdetails[11] == 1 %}
-  <nav class="nav flex-column">
+  {% if adminaccess == 0 %}
+  <nav class="nav flex-column" >
+    <a class="nav-link" href="/member?memberid={{customerdetails[0]}}&admin=0">Home</a>
+  </nav>
+  {% else %}
+  <nav class="nav flex-column" >
+  
     <a class="nav-link active" aria-current="page" href="/members" Id="selected">Accounts</a>
     <a class="nav-link" href="/news">News</a>
     <a class="nav-link" href="/teams">Teams</a>
     <a class="nav-link"  href="/fixtures">Fixtures</a>
+    <a class="nav-link"  href="/grades" >Grade</a>
   </nav>
-  {% endif%}
+  {%endif%}
+
+
   <main>
     <h1>Update Member Details</h1>
     {% if customerdetails %}

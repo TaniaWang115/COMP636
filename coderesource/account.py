@@ -10,7 +10,7 @@ def GetAllMemberNames():
 
 def GetAllMembers(IsActive):
     if IsActive:
-        sqlCommand= "select MemberID,memberfirstname, memberlastname, clubname, teamname from Members left join Clubs on Members.clubId = Clubs.clubid left join Teams on Teams.teamId = Members.teamid where Members.membershipstatus= 1"
+        sqlCommand= "select MemberID,memberfirstname, memberlastname, clubname, teamname,  membershipstatus from Members left join Clubs on Members.clubId = Clubs.clubid left join Teams on Teams.teamId = Members.teamid where Members.membershipstatus= 1"
     else:
         sqlCommand= "select MemberID,memberfirstname, memberlastname, clubname, teamname,  membershipstatus from Members left join Clubs on Members.clubId = Clubs.clubid left join Teams on Teams.teamId = Members.teamid "
 
@@ -63,8 +63,8 @@ def AssignMemberToClub(memberID, clubID):
     return select_result
 
 
-def AssignMemberToTeam(memberID, teamID,clubId,gradeid):
-    sqlCommand = "update Members set TeamId ='{}',clubid='{}',gradeid='{}' where memberId= {};".format(teamID,clubId,gradeid,memberID)
+def AssignMemberToTeam(memberID, teamID,clubId):
+    sqlCommand = "update Members set TeamId ='{}',clubid='{}' where memberId= {};".format(teamID,clubId,memberID)
     print(f"{sqlCommand}")
     select_result = db.DBOperator(sqlCommand)
     print(f"{select_result}")

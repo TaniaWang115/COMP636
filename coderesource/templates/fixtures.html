@@ -18,15 +18,17 @@
     <a class="nav-link" href="/news">News</a>
     <a class="nav-link" href="/teams">Teams</a>
     <a class="nav-link" aria-current="page" href="/fixtures" Id="selected">Fixtures</a>
+    <a class="nav-link"  href="/grades" >Grade</a>
   </nav>
   <main>
       <h2>Fixtures</h2>
-      <br>  
-        <a href="fixtures/add" class="link-primary">Add a Fixture</a>
         <div class="row mb-3">
-          <label for="firstname" class="col-sm-4 col-form-label">Type something in the input field to search the table:</label>
+
+          <div class="col-sm-3">
+            <input class="form-control" id="myInput" type="text" placeholder="Search fixture">
+          </div>
           <div class="col-sm-6">
-            <input class="form-control" id="myInput" type="text" placeholder="Search..">
+            <a href="fixtures/add" class="link-primary float-end">Add a new Fixture</a>
           </div>
         </div>
           

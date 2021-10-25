@@ -19,17 +19,23 @@
     <a class="nav-link" href="/news">News</a>
     <a class="nav-link" href="/teams">Teams</a>
     <a class="nav-link"  href="/fixtures">Fixtures</a>
+    <a class="nav-link"  href="/grades" >Grade</a>
   </nav>
   <main>
     
     <h2>Account List</h2>
     
-    <a href="member/add" class="link-primary">Add a New Member</a>
+    
     <br> 
     <div class="row mb-3">
-      <label for="firstname" class="col-sm-4 col-form-label">Type something in the input field to search the table:</label>
-      <div class="col-sm-6">
-        <input class="form-control" id="myInput" type="text" placeholder="Search..">
+      <div class="col-sm-3">
+        <input class="form-control" id="myInput" type="text" placeholder="Search member">
+      </div>
+      <div class="col-sm-3">
+        <a href="member/add" class="link-primary float-end">Add a New Member</a>
+      </div>
+      <div class="col-sm-3">
+        <a href="members/active" class="link-primary float-end">List Active Members</a>
       </div>
     </div>
       
@@ -55,20 +61,20 @@
         <td>{{result[2]}}</td>
         <td>{{result[3]}}</td>
         <td>{{result[4]}}</td>
-        {% if result[5] == 1%}
+        {% if result[5] == 1 %}
         <td>Active</td>
         {% else %}
         <td>Inactive</td>
         {% endif %}
         <td>
-            <a href="/member?memberid={{result[0]}}" class="link-info">Details</a>
+            <a href="/member/details?memberid={{result[0]}}" class="link-info">Details</a>
             <a href="/member/update?memberid={{result[0]}}" class="link-secondary">Update</a>
             <form action="/member/status" method="POST" id="myForm">
               <input type="HIDDEN" name="memberid" id ="memberid">
               <input type="HIDDEN" name="status" id="status">
             </form>
             {% if result[5] == 1 %}
-            <a  rel="nofollow" data-method="post" href="#" onClick="showData('{{result[0]}}','{{result[5]}}' )">Inactive</a>
+            <a  rel="nofollow" data-method="post" href="#" onClick="showData('{{result[0]}}','{{result[5]}}' )">InActive</a>
             {% else %}
             <a  rel="nofollow" data-method="post" href="#" onClick="showData('{{result[0]}}','{{result[5]}}' )">Active</a>
             {% endif %}

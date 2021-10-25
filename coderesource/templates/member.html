@@ -15,6 +15,7 @@
  
   <div>
     <h2>Information Details</h2>
+    <a href="/member/update?memberid={{customerdetail[0]}}" class="link-secondary">Update</a>
     <table class="table table-hover">
         <thead>
         <tr>
@@ -41,7 +42,7 @@
         </tr>  
       </tbody>
     </table>
-    <a href="/member/update?memberid={{customerdetail[0]}}" class="link-secondary">Update</a>
+    
 </div>
 <div>
     <h2>News for Club-{{newslist[0][1]}}</h2>
@@ -78,20 +79,27 @@
     <table class="table table-striped">
         <thead>
         <tr>
-        <th>Id</th>
-        <th>FixtureDate</th>
-        <th>HomeTeam</th>
-        <th>AwayTeam</th>
+          <th>Id</th>
+          <th>FixtureDate</th>
+          <th>Place</th>
+          <th>HomeTeamName</th>
+          <th>HomeTeamClubName</th>
+          <th>AwayTeamName</th>
+          <th>AwayTeamClubName</th>
         </tr>
       </thead>
       
       <tbody>
         {% for fixture in fixturelist %}
         <tr>
+
           <td>{{fixture[0]}}</td>
-          <td>{{fixture[1]}}</td>
-          <td>{{fixture[2]}}</td>
-          <td>{{fixture[3]}}</td>
+        <td>{{fixture[1]}}</td>
+        <td>{{fixture[5]}}</td>
+        <td>{{fixture[2]}}</td>
+        <td>{{fixture[4]}}</td>
+        <td>{{fixture[6]}}</td>
+        <td>{{fixture[8]}}</td>
         </tr>  
         {% endfor %}
       </tbody>

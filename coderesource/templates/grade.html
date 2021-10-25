@@ -9,7 +9,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 
-  <title>News</title>
+  <title>Grade</title>
 </head>
 <body>
   <header>
@@ -17,52 +17,51 @@
   </header>
   <nav class="nav flex-column">
     <a class="nav-link active" href="/members">Accounts</a>
-    <a class="nav-link" aria-current="page" href="/news" Id="selected">News</a>
+    <a class="nav-link" aria-current="page" href="/news" >News</a>
     <a class="nav-link" href="/teams">Teams</a>
     <a class="nav-link"  href="/fixtures">Fixtures</a>
-    <a class="nav-link"  href="/grades" >Grade</a>
+    <a class="nav-link"  href="/grades" Id="selected">Grade</a>
   </nav>
   <main>
-    <h2>News</h2>
-    
-    <br> 
-    <div class="row mb-3">
+    <h2>Grade Eligibility</h2>
+    <div class="row">
       <div class="col-sm-3">
-        <input class="form-control" id="myInput" type="text" placeholder="Search..">
+        <input class="form-control" id="myInput" type="text" placeholder="Search grade...">
       </div>
       <div class="col-sm-6">
-        <a href="news/add" class="link-primary float-end">Add News</a>
+        <button class="btn btn-primary float-end" onclick="printDiv('printableArea')">Print</button>
       </div>
     </div>
       
-    <table class="table table-striped">
+    <table class="table table-striped" id="Mytable">
       <thead>
       <tr>
-      <th>NewId</th>
+      <th>MemberId</th>
+      <th>FirstName</th>
+      <th>LastName</th>
+      <th>TeamName</th>
       <th>ClubName</th>
-      <th>NewHeader</th>
-      <th>NewByline</th>
-      <th>NewsDate</th>
-      <th>News</th>
+      <th>Birthday</th>
+      <th>Grade</th>
+      <th>GradeMinimumAge</th>
+      <th>GradeMaximumAge</th>
       <!--th>Operator</th-->
       </tr>
     </thead>
     {# this is a comment the line below prints the db result #}
     
     <tbody id="myTable">
-      {% for result in dbresult %}
+      {% for result in gradelist %}
       <tr>
         <td>{{result[0]}}</td>
         <td>{{result[1]}}</td>
         <td>{{result[2]}}</td>
         <td>{{result[3]}}</td>
         <td>{{result[4]}}</td>
-        <td>{{result[5]}}</td>
-        <!--td>
-            <a href="/member?memberid={{result[0]}}" class="link-info">Details</a>
-            <a href="/member/update?memberid={{result[0]}}" class="link-secondary">Update</a>
-            <a  href="/news/delete?newsid={{result[0]}}" class="link-danger">Delete</a>
-        </td-->
+        <td>{{result[6]}}</td>
+        <td>{{result[7]}}</td>
+        <td>{{result[8]}}</td>
+        <td>{{result[9]}}</td>
       </tr>  
       {% endfor %}
     </tbody>
@@ -72,7 +71,7 @@
     <p>Developed by Amanda Chen</p>
  </footer>
  <script>
-  $(document).ready(function(){
+$(document).ready(function(){
     $("#myInput").on("keyup", function() {
       var value = $(this).val().toLowerCase();
       $("#myTable tr").filter(function() {
@@ -80,6 +79,20 @@
       });
     });
   });
+
+function printDiv(divName) {
+     var printContents = document.getElementById("Mytable").outerHTML;
+     var originalContents = document.body.innerHTML;
+
+     document.body.innerHTML = printContents;
+
+     window.print();
+
+     document.body.innerHTML = originalContents;
+}
+
+  
+
   </script>
 </body>
 </html>

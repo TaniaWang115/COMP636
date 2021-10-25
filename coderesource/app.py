@@ -11,7 +11,7 @@ import team
 import club
 import fixture
 import grade
-isAdmin = "0"
+isAdmin = 0
 memberid = " "
 
 
@@ -37,7 +37,6 @@ def member():
     else:
         fixturesList = fixture.GetFixtureById(teamId)
     newsList = news.GetNewsByMemberId(id)
-    
     print(select_result)
     return render_template('member.html',customerdetail = select_result,newslist = newsList,fixturelist = fixturesList)
     
@@ -46,11 +45,24 @@ def member():
 def members():
     global isAdmin
     if (request.args.get('admin') == '1'):
-        isAdmin = "1"
+        isAdmin = 1
     select_result = account.GetAllMembers(False)
     print(select_result)
     return render_template('members.html',dbresult = select_result,adminaccess = isAdmin)
 
+@app.route('/members/active', methods=['GET'])
+def membersactive():
+    global isAdmin
+    select_result = account.GetAllMembers(True)
+    print(select_result)
+    return render_template('members.html',dbresult = select_result,adminaccess = isAdmin)
+
+@app.route('/member/details', methods=['GET'])
+def memberdetails():
+    id = request.args.get('memberid')
+    select_result = account.GetMemberDetail(id)
+    print(select_result)
+    return render_template('memberdetails.html',customerdetails = select_result)
 
 @app.route('/member/update', methods=['GET','POST'])
 def memberUpdate():
@@ -65,12 +77,13 @@ def memberUpdate():
         city = request.form.get('city')
         birthdate = request.form.get('birthdate')
         account.UpdateMemberDetail(id,firstname,lastname,email,phone,address1,address2,city,birthdate)
-        return redirect("/member?memberid={}".format(id))
+        return redirect("/member/details?memberid={}".format(id))
     else:
         id = request.args.get('memberid')
         select_result = account.GetMemberDetail(id)
         print(select_result)
-        return render_template('memberupdate.html',customerdetails = select_result)
+        global isAdmin
+        return render_template('memberupdate.html',customerdetails = select_result, adminaccess = isAdmin)
 
 @app.route('/member/status', methods=['GET','POST'])
 def memberStatus():
@@ -198,6 +211,13 @@ def addFixtures():
 
 @app.route('/grades', methods=['GET'])
 def grades():
-    select_result = team.GetAllTeams()
-    print(select_result)
-    return render_template('fixtureadd.html',teamlist = select_result)
+    team_result = team.GetAllTeams()
+    teamId = request.args.get('teamid')
+    if teamId == None:
+        select_result = grade.GetAllGradeEligability()
+        print(select_result)
+        return render_template('grade.html',gradelist = select_result, teamlist=team_result)
+    else:
+        select_result = grade.GetAllGradeEligabilityByTeamId(teamId)
+        print(select_result)
+        return render_template('grade.html',gradelist = select_result, teamlist=team_result)
