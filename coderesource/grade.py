@@ -12,7 +12,7 @@ def GetAllGradeEligability():
                 left join Teams on Members.teamid = Teams.teamid
                 left join Clubs on Clubs.clubid = Teams.clubid 
                 left join Grades on Grades.gradeId= Teams.teamgrade
-                where DATEDIFF('2021-1-1', Members.birthdate)/365 < Grades.GradeMaximumAge and Grades.GradeMinimumAge < DATEDIFF('2021-1-1', Members.birthdate)/365;
+                where Members.membershipstatus='1' and DATEDIFF('2021-1-1', Members.birthdate)/365 < Grades.GradeMaximumAge and Grades.GradeMinimumAge < DATEDIFF('2021-1-1', Members.birthdate)/365;
                 """.replace('\n',' ')
     print(f"{sqlCommand}")
     select_result = db.DBOperator(sqlCommand)
@@ -24,7 +24,7 @@ def GetAllGradeEligabilityByTeamId(teamId):
                 left join Teams on Members.teamid = Teams.teamid
                 left join Clubs on Clubs.clubid = Teams.clubid 
                 left join Grades on Grades.gradeId= Teams.teamgrade
-                where DATEDIFF('2021-1-1', Members.birthdate)/365 < Grades.GradeMaximumAge and Grades.GradeMinimumAge < DATEDIFF('2021-1-1', Members.birthdate)/365;
+                where Members.membershipstatus='1' and DATEDIFF('2021-1-1', Members.birthdate)/365 < Grades.GradeMaximumAge and Grades.GradeMinimumAge < DATEDIFF('2021-1-1', Members.birthdate)/365;
                 """.replace('\n',' ')
     sqlCommand += (" and teamId = %d", teamId)
     print(f"{sqlCommand}")

@@ -14,19 +14,16 @@
   </header>
  
   <div>
-    <h2>Information Details</h2>
-    <a href="/member/update?memberid={{customerdetail[0]}}" class="link-secondary">Update</a>
-    <table class="table table-hover">
+    <h2 style="margin-left: 0.5rem;">Information Details</h2>
+    
+    <table class="table table-hover" style="margin-left: 0.5rem;">
         <thead>
         <tr>
         <th>FirstName</th>
         <th>LastName</th>
-        <th>Email</th>
-        <th>phone</th>
-        <th>Address</th>
-        <th>Region</th>
-        <th>City</th>
-        <th>Birthdate</th>
+        <th>ClubName</th>
+        <th>TeamName</th>
+        <th>Operate</th>
         </tr>
       </thead>
       <tbody>
@@ -35,18 +32,15 @@
           <td>{{customerdetail[2]}}</td>
           <td>{{customerdetail[3]}}</td>
           <td>{{customerdetail[4]}}</td>
-          <td>{{customerdetail[5]}}</td>
-          <td>{{customerdetail[6]}}</td>
-          <td>{{customerdetail[7]}}</td>
-          <td>{{customerdetail[8]}}</td>
+          <th><a href="/member/update?memberid={{customerdetail[0]}}" class="link-primary">Update Your Information Details</a></th>
         </tr>  
       </tbody>
     </table>
-    
 </div>
+</br>
 <div>
-    <h2>News for Club-{{newslist[0][1]}}</h2>
-    <table class="table table-striped">
+    <h2 style="margin-left: 0.5rem;">News for Club-{{newslist[0][1]}}</h2>
+    <table class="table table-striped" style="margin-left: 0.5rem;">
         <thead>
         <tr>
         <th>NewId</th>
@@ -55,6 +49,7 @@
         <th>NewByline</th>
         <th>NewsDate</th>
         <th>News</th>
+        <th><a></a></th>
         </tr>
       </thead>
       
@@ -72,11 +67,12 @@
       </tbody>
     </table>
 </div>
+</br>
   <div>
    
     {% if fixturelist %}
-    <h2>Upcoming Fixtures for Team-{{customerdetail[12]}}</h2>
-    <table class="table table-striped">
+    <h2 style="margin-left: 0.5rem;">Upcoming Fixtures for Team-{{customerdetail[4]}}</h2>
+    <table class="table table-striped" style="margin-left: 0.5rem;">
         <thead>
         <tr>
           <th>Id</th>

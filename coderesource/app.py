@@ -29,8 +29,9 @@ def home():
 @app.route('/member', methods=['GET'])
 def member():
     id = request.args.get('memberid')
-    select_result = account.GetMemberDetail(id)
-    teamId = select_result[10]
+    select_result = account.GetMemberById(id)
+    
+    teamId = select_result[5]
     print(teamId)
     if(teamId== None): #teamid = null
         fixturesList = None

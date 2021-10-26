@@ -1,21 +1,22 @@
 import connect, mysql.connector
 
-
 connection = None
 dbconn = None
-
 
 def DBConnect():
     global dbconn
     global connection
     if dbconn == None:
-        connection = mysql.connector.connect(user=connect.dbuser, \
-        password=connect.dbpass, host=connect.dbhost, \
-        database=connect.dbname, autocommit=True)
+        connection = mysql.connector.connect(user=connect.dbuser, password=connect.dbpass, host=connect.dbhost, database=connect.dbname, autocommit=True)
         dbconn = connection.cursor()
         return dbconn
     else:
-        return dbconn
+        if connection.is_connected():
+            return dbconn
+        else:
+            connection = None
+            dbconn = None
+            return DBConnect()
 
 
 def DBOperator(sqlCommands):    
