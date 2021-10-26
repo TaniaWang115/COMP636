@@ -67,7 +67,9 @@ def memberdetails():
 
 @app.route('/member/update', methods=['GET','POST'])
 def memberUpdate():
+    global isAdmin
     if request.method == 'POST':
+        admin = request.args.get('admin')
         id = request.form.get('id')
         firstname = request.form.get('firstname')
         lastname = request.form.get('lastname')
@@ -78,12 +80,15 @@ def memberUpdate():
         city = request.form.get('city')
         birthdate = request.form.get('birthdate')
         account.UpdateMemberDetail(id,firstname,lastname,email,phone,address1,address2,city,birthdate)
-        return redirect("/member/details?memberid={}".format(id))
+        if isAdmin ==0:
+            return redirect("/member?memberid={}&admin=0".format(id))
+        else:
+            return redirect("/members")
     else:
         id = request.args.get('memberid')
         select_result = account.GetMemberDetail(id)
         print(select_result)
-        global isAdmin
+        
         return render_template('memberupdate.html',customerdetails = select_result, adminaccess = isAdmin)
 
 @app.route('/member/status', methods=['GET','POST'])

@@ -20,7 +20,7 @@ def GetAllMembers(IsActive):
     return select_result
 
 def GetMemberById(memberid):
-    sqlCommand ="select MemberID,memberfirstname, memberlastname, clubname, teamname,  Members.teamid from Members left join Clubs on Members.clubId = Clubs.clubid left join Teams on Teams.teamId = Members.teamid where Members.memberid ='{}'".format(memberid)
+    sqlCommand ="select MemberID,memberfirstname, memberlastname, clubname, teamname,  Members.teamid,adminaccess from Members left join Clubs on Members.clubId = Clubs.clubid left join Teams on Teams.teamId = Members.teamid where Members.memberid ='{}'".format(memberid)
     print(f"{sqlCommand}")
     select_result = db.DBOperatorFetchOne(sqlCommand)
     print(f"{select_result}")
