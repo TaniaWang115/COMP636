@@ -37,6 +37,7 @@
       {% endif %}
         {% if customerdetails %} 
         <input type="hidden" name="id" value="{{customerdetails[0]}}" /> {% endif %}
+        <input type="hidden" name="admin" value="{{customerdetails[0]}}" /> 
         <div class="row mb-3">
           <label for="firstname" class="col-sm-2 col-form-label">FirstName:</label>
           <div class="col-sm-6">
