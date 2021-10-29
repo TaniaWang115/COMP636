@@ -31,10 +31,10 @@
             {% for result in dbresult %}   
                 <li>
                     {% if result[3]==0 %}
-                    <a class="dropdown-item" href="/member?memberid={{result[0]}}&admin=0">{{result[1]}} {{result[2]}}</a>
+                    <a class="dropdown-item" href="/member?memberid={{result[0]}}&admin=0 ">{{result[1]}} {{result[2]}}</a>
                     {% endif %}
                     {% if result[3]==1 %}
-                   <a class="dropdown-item" href="/members?admin=1">{{result[1]}} {{result[2]}}</a>
+                   <a class="dropdown-item" href="/members?admin=1&clubid={{result[4]}}">{{result[1]}} {{result[2]}}</a>
                     {% endif %}
                 </li>
             {% endfor %}  

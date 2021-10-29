@@ -2,17 +2,17 @@ import db
 
 #get all member
 def GetAllMemberNames():
-    sqlCommand= "SELECT MemberID, MemberFirstName as FirstName, MemberLastName as LastName, adminaccess from Members;"
+    sqlCommand= "SELECT MemberID, MemberFirstName as FirstName, MemberLastName as LastName, adminaccess, clubid from Members;"
     print(f"{sqlCommand}")
     select_result = db.DBOperator(sqlCommand)
     print(f"{select_result}")
     return select_result
 
-def GetAllMembers(IsActive):
+def GetAllMembers(IsActive, clubid):
     if IsActive:
-        sqlCommand= "select MemberID,memberfirstname, memberlastname, clubname, teamname,  membershipstatus from Members left join Clubs on Members.clubId = Clubs.clubid left join Teams on Teams.teamId = Members.teamid where Members.membershipstatus= 1"
+        sqlCommand= "select MemberID,memberfirstname, memberlastname, clubname, teamname,  membershipstatus from Members left join Clubs on Members.clubId = Clubs.clubid left join Teams on Teams.teamId = Members.teamid where Members.membershipstatus= 1 and Members.clubid ='{}' ".format(clubid)
     else:
-        sqlCommand= "select MemberID,memberfirstname, memberlastname, clubname, teamname,  membershipstatus from Members left join Clubs on Members.clubId = Clubs.clubid left join Teams on Teams.teamId = Members.teamid "
+        sqlCommand= "select MemberID,memberfirstname, memberlastname, clubname, teamname,  membershipstatus from Members left join Clubs on Members.clubId = Clubs.clubid left join Teams on Teams.teamId = Members.teamid where Members.clubid ='{}' ".format(clubid)
 
     print(f"{sqlCommand}")
     select_result = db.DBOperator(sqlCommand)
@@ -20,7 +20,7 @@ def GetAllMembers(IsActive):
     return select_result
 
 def GetMemberById(memberid):
-    sqlCommand ="select MemberID,memberfirstname, memberlastname, clubname, teamname,  Members.teamid,adminaccess from Members left join Clubs on Members.clubId = Clubs.clubid left join Teams on Teams.teamId = Members.teamid where Members.memberid ='{}'".format(memberid)
+    sqlCommand ="select MemberID,memberfirstname, memberlastname, clubname, teamname,  Members.teamid,adminaccess from Members left join Clubs on Members.clubId = Clubs.clubid left join Teams on Teams.teamId = Members.teamid where Members.memberid ='{}' ".format(memberid)
     print(f"{sqlCommand}")
     select_result = db.DBOperatorFetchOne(sqlCommand)
     print(f"{select_result}")

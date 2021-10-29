@@ -13,7 +13,7 @@ import fixture
 import grade
 isAdmin = 0
 memberid = " "
-
+clubid = None
 
 app = Flask(__name__)
 
@@ -45,16 +45,20 @@ def member():
 @app.route('/members', methods=['GET'])
 def members():
     global isAdmin
+    global clubid
     if (request.args.get('admin') == '1'):
         isAdmin = 1
-    select_result = account.GetAllMembers(False)
+    if clubid ==None:
+        clubid = request.args.get('clubid')
+    select_result = account.GetAllMembers(False,clubid)
     print(select_result)
     return render_template('members.html',dbresult = select_result,adminaccess = isAdmin)
 
 @app.route('/members/active', methods=['GET'])
 def membersactive():
     global isAdmin
-    select_result = account.GetAllMembers(True)
+    global clubid
+    select_result = account.GetAllMembers(True,clubid)
     print(select_result)
     return render_template('members.html',dbresult = select_result,adminaccess = isAdmin)
 
@@ -117,11 +121,12 @@ def addMember():
         address2 = request.form.get('region')
         city = request.form.get('city')
         birthdate = request.form.get('birthdate')
-        clubid = request.form.get('clubid')
-        account.AddMember(firstname,lastname,email,phone,address1,address2,city,birthdate,clubid)
+        clubno = request.form.get('clubid')
+        account.AddMember(firstname,lastname,email,phone,address1,address2,city,birthdate,clubno)
         return redirect("/members")
     else:
-        select_result = club.GetClubList()
+        global clubid
+        select_result = club.GetClubList(clubid)
         print(select_result)
         return render_template('memberadd.html',clublist = select_result)
 
@@ -129,27 +134,30 @@ def addMember():
 def memberaddteam(): 
     if request.method == 'POST':
         memberid = request.form.get('memberid')
-        clubid = request.form.get('clubid')
+        clubNo = request.form.get('clubid')
         teamid = request.form.get('teamid') 
-        account.AssignMemberToTeam(memberid,teamid,clubid)
+        account.AssignMemberToTeam(memberid,teamid,clubNo)
         return redirect('/members')
     else:
+        global clubid
         id = request.args.get('memberid')
         firstname = request.args.get('firstname')
         lastname = request.args.get('lastname')
-        select_result = team.GetAllTeams()
+        select_result = team.GetAllTeams(clubid)
         return render_template('memberteam.html', memberId = id, memberName=str(firstname)+" "+str(lastname),dbresult = select_result)
 
 
 @app.route('/news', methods=['GET'])
 def allnews():
-    select_result = news.GetNews()
+    global clubid
+    select_result = news.GetNews(clubid)
     return render_template('news.html',dbresult = select_result,adminaccess = isAdmin)
 
 @app.route('/news/add', methods=['GET','POST']) 
 def addnews(): 
     if request.method == 'GET':
-        select_result = club.GetClubList()
+        global clubid
+        select_result = club.GetClubList(clubid)
         return render_template('newsadd.html', clublist = select_result) 
     else:
         clubid = request.form.get('clubid')
@@ -172,13 +180,15 @@ def newsdetails():
 
 @app.route('/teams', methods=['GET'])
 def allteams():
-    select_result = team.GetAllTeams()
+    global clubid
+    select_result = team.GetAllTeams(clubid)
     return render_template('teams.html',dbresult = select_result,adminaccess = isAdmin)
 
 @app.route('/teams/add', methods=['GET','POST'])
 def addteams():
     if request.method == 'GET':
-        select_result = club.GetClubList()
+        global clubid
+        select_result = club.GetClubList(clubid)
         print(select_result)
         grade_result = grade.GetAllGrade()
         return render_template('teamadd.html',clublist = select_result,gradelist=grade_result)
@@ -191,7 +201,8 @@ def addteams():
 
 @app.route('/fixtures', methods=['GET'])
 def fixtures():
-    select_result = fixture.GetFixture()
+    global clubid
+    select_result = fixture.GetFixtureByClub(clubid)
     return render_template('fixtures.html',dbresult = select_result,adminaccess = isAdmin)  
 
 @app.route('/fixtures/add', methods=['GET','POST'])
@@ -199,7 +210,7 @@ def addFixtures():
     if request.method == 'GET':
         gradeId = request.args.get('gradeid')
         if gradeId == None:
-            select_result = team.GetAllTeams()
+            select_result = team.GetAllTeamForFixture()
             grade_result = grade.GetAllGrade()
             print(select_result)
             return render_template('fixtureadd.html',teamlist = select_result, gradelist = grade_result,gradeid= None)
@@ -217,13 +228,14 @@ def addFixtures():
 
 @app.route('/grades', methods=['GET'])
 def grades():
-    team_result = team.GetAllTeams()
-    teamId = request.args.get('teamid')
-    if teamId == None:
-        select_result = grade.GetAllGradeEligability()
-        print(select_result)
-        return render_template('grade.html',gradelist = select_result, teamlist=team_result)
+    global clubid
+    team_result = team.GetAllTeams(clubid)
+    date = request.args.get('date')
+    if date ==None:
+        date='2021-01-01'
+        select_result = grade.GetAllGradeEligability(clubid)
     else:
-        select_result = grade.GetAllGradeEligabilityByTeamId(teamId)
-        print(select_result)
-        return render_template('grade.html',gradelist = select_result, teamlist=team_result)
+        select_result = grade.GetAllGradeEligabilityBydate(clubid,date)
+    print(select_result)
+    
+    return render_template('grade.html',gradelist = select_result, teamlist=team_result, selectdate=date)

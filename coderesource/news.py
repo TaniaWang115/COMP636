@@ -18,8 +18,8 @@ def AddNews(clubId,newsheader, newsbyline, news):
     print(f"{select_result}")
     return select_result
 
-def GetNews():
-    sqlCommand = "select newsID, ClubName, newsheader, newsbyline, newsdate, news from ClubNews join Clubs on ClubNews.ClubId= Clubs.ClubId order by ClubNews.newsdate desc, newsID desc;"
+def GetNews(clubid):
+    sqlCommand = "select newsID, ClubName, newsheader, newsbyline, newsdate, news from ClubNews join Clubs on ClubNews.ClubId= Clubs.ClubId where Clubs.Clubid='{}' order by ClubNews.newsdate desc, newsID desc ;".format(clubid)
     print(f"{sqlCommand}")
     select_result = db.DBOperator(sqlCommand)
     print(f"{select_result}")
