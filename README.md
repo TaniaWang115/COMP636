@@ -28,11 +28,15 @@ For teammember:
 
 For admin:
 > Because there are four major parts involved, I set the different parts to different navs, so that different pages can be reached through different navs.
+> 
 > When it comes to displaying all users, a single button is used to display all currently active users. However, other operations are displayed at the end of each line.
+> 
 > When assigning a team to a user, because each user can only assign one group, I assume that if the admin wants to reassign a team to the user, this is also feasible, 
-> so my approach is to list all the teams in the current club to be assigned by the admin, and then update The database is fine.
+>  so my approach is to list all the teams in the current club to be assigned by the admin, and then update The database is fine.
+>  
 > In the assign fixture, because of the grade limitation, assuming that the admin can see the team of other clubs, my solution is to let the admin choose a different grade,
 > andthen select the team through the grade.
+> 
 > When printing grade ebiligation, the initial value is set to 2021/1/1 for the convenience of users’ query  
 
       
