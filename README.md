@@ -19,7 +19,7 @@ Route | Function| Description
 /fixtures | fixtures() | list all the club's fixture 
 /fixtures/add   | addFixtures()  | add a new fixture
 /grades  | grades()  | list all the grade eligibility
-## assumptions and design
+## assumptions and design decision
 For teammember:
 > For team members, who can only view and modify their basic information including name, date of birth, email, phone number, and residential address and so on. 
 > At the same time, check the fixtures belonging to the team, as well as the news of your own club.
