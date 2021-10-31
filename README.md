@@ -1,20 +1,21 @@
-# COMP636
-| route             | html                  | function         |
-| ----------------- | ----------------------|--------------	   |
-|/            		| home.html             | home()           | 
-| /member        	| member.html  			| member()         | 
-| members 			| members.html    		| members()        |
-| /members/active   | members.html          | membersactive()  |
-| /member/details   | memberdetails.html    | memberdetails()  |
-| /member/update    | memberupdate.html     | memberUpdate()   |
-| /member/status 	| /members     			| memberStatus()   |
-| /member/add  		| memberadd.html 		| addMember()      |
-| /member/team      | memberteam.html     	| memberaddteam()  |
-| /news   			| news.html   			| allnews()        |
-| /news/add     	| newsadd.html			| addnews()        |
-| /news/details   	| news.html  			| newsdetails()    |
-| /teams     		| teams.html			| allteams()       |
-| /teams/add     	| teamadd.html			| addteams()       |
-| /fixtures     	| fixtures.html			| fixtures()       |
-| /fixtures/add    	| fixtureadd.html		| addFixtures()    |
-| /grades     		| grade.html			| grades()         |
+# COMP636 Report
+## route & functions
+route              | function         
+----------------- |----------------  
+/|home()            
+/member|member()    	     
+/members| members()        
+/members/active| membersactive()  
+/member/details| memberdetails()  
+/member/update| memberUpdate()   
+/member/status 	| memberStatus()   
+/member/add  		| addMember()      
+/member/team     | memberaddteam()  
+/news   		| allnews()        
+/news/add     	| addnews()        
+/news/details   | newsdetails()    
+/teams     		| allteams()       
+/teams/add     | addteams()       
+/fixtures     	| fixtures()       
+/fixtures/add    | addFixtures()    
+/grades     		| grades()         
